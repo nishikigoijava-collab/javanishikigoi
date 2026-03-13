@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JAVANISHIKIGOI - Pusat Ikan Koi Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-2px); box-shadow: 0 10px 40px -10px rgba(200, 30, 58, 0.2); }
+    </style>
+</head>
+<body class="font-sans bg-gradient-to-b from-slate-50 to-white min-h-screen flex flex-col">
+    
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
+        <div class="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div id="logo-container" class="w-10 h-10 bg-gradient-to-br from-red-600 to-orange-500 rounded-lg flex items-center justify-center">
+                    <svg id="logo-fish" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.85 0 3.58-.5 5.07-1.37l-1.5-1.5A8 8 0 1 1 12 4a8 8 0 0 1 8 8c0 1.48-.4 2.87-1.1 4.07l1.5 1.5A9.96 9.96 0 0 0 22 12c0-5.52-4.48-10-10-10z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
+                    </svg>
+                    <img id="logo-img" class="w-10 h-10 rounded-lg object-cover hidden" alt="Logo">
+                </div>
+                <div>
+                    <h1 id="business-name" class="font-bold text-lg text-slate-800">JAVANISHIKIGOI</h1>
+                    <p class="text-xs text-slate-500">Pusat Ikan Koi Premium</p>
+                </div>
+            </div>
+            <button id="admin-btn" onclick="showAdminLogin()" class="p-2 text-slate-600 hover:bg-slate-100 rounded-lg">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-container" class="relative w-full h-48 md:h-64 bg-gradient-to-br from-red-600 via-orange-500 to-amber-400">
+        <img id="banner-img" class="w-full h-full object-cover hidden" alt="Banner">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div class="absolute bottom-4 left-4 right-4 text-white">
+            <h2 class="text-xl md:text-2xl font-bold">Selamat Datang</h2>
+            <p class="text-sm opacity-90">Koleksi Ikan Koi Premium Terbaik</p>
+        </div>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="bg-white border-b border-slate-100 py-3">
+        <div class="max-w-lg mx-auto px-4">
+            <div class="flex items-center justify-center gap-4 text-xs">
+                <div class="flex items-center gap-1.5 text-emerald-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    <span>Garansi</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-blue-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                    </svg>
+                    <span>COD</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-amber-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                    </svg>
+                    <span>Packing Aman</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="bg-white border-b border-slate-100 py-3 sticky top-[60px] z-40">
+        <div class="max-w-lg mx-auto px-4">
+            <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1" id="category-filter">
+                <button onclick="filterCategory('all')" class="category-btn px-4 py-2 rounded-full text-xs font-medium bg-red-600 text-white whitespace-nowrap" data-category="all">
+                    Semua
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Grid -->
+    <main class="flex-1 max-w-lg mx-auto w-full px-3 py-4">
+        <div id="products-grid" class="grid grid-cols-2 gap-3">
+            <!-- Products will be loaded here -->
+        </div>
+    </main>
+
+    <!-- Shipping Button -->
+    <div class="fixed bottom-20 left-1/2 -translate-x-1/2 z-40">
+        <button onclick="showShipping()" class="bg-white shadow-lg border border-slate-200 px-4 py-2 rounded-lg text-xs font-medium text-slate-700 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+            </svg>
+            Cek Ongkir
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white mt-auto">
+        <div class="max-w-lg mx-auto px-4 py-6">
+            <div class="text-center mb-4">
+                <h3 id="footer-name" class="font-bold text-lg">JAVANISHIKIGOI</h3>
+                <p class="text-slate-400 text-sm">Pusat Penjualan Ikan Koi Premium</p>
+            </div>
+            <div class="flex flex-col gap-3 text-sm">
+                <a id="footer-wa" href="#" target="_blank" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+                    <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    <span id="footer-phone">085704736854</span>
+                </a>
+                <a id="footer-email-link" href="#" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span id="footer-email">nishikigoijava@gmail.com</span>
+                </a>
+                <a id="footer-map" href="https://maps.app.goo.gl/8ME1FokgqUgPGqc96" target="_blank" class="flex items-center gap-2 text-slate-300 hover:text-white transition-colors">
+                    <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    Lokasi Kami
+                </a>
+            </div>
+            <div class="border-t border-slate-700 my-4"></div>
+            <p class="text-center text-slate-500 text-xs">
+                © 2025 JAVANISHIKIGOI. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="closeProductModal()"></div>
+        <div class="absolute inset-4 md:inset-10 lg:inset-20 bg-white rounded-lg overflow-hidden flex flex-col max-w-md mx-auto">
+            <div class="flex items-center justify-between p-4 border-b">
+                <h3 id="modal-product-name" class="font-semibold text-lg truncate">Product Name</h3>
+                <button onclick="closeProductModal()" class="p-2 hover:bg-slate-100 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto">
+                <div class="relative aspect-[9/16] bg-slate-100">
+                    <img id="modal-product-image" src="" alt="" class="w-full h-full object-cover">
+                    <video id="modal-product-video" class="w-full h-full object-cover hidden" controls playsinline></video>
+                </div>
+                <div class="p-4">
+                    <span id="modal-product-category" class="inline-block px-3 py-1 bg-slate-100 rounded-full text-xs mb-2">Category</span>
+                    <p id="modal-product-price" class="text-2xl font-bold text-red-600">Rp 0</p>
+                    <p id="modal-product-description" class="text-slate-600 text-sm mt-2 whitespace-pre-line"></p>
+                </div>
+            </div>
+            <div class="p-4 border-t">
+                <button id="modal-wa-btn" class="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Hubungi via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shipping Modal -->
+    <div id="shipping-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="closeShipping()"></div>
+        <div class="absolute inset-4 md:inset-10 lg:inset-20 bg-white rounded-lg overflow-hidden flex flex-col max-w-lg mx-auto">
+            <div class="flex items-center justify-between p-4 border-b">
+                <h3 class="font-semibold text-lg flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+                    </svg>
+                    Informasi Ongkir
+                </h3>
+                <button onclick="closeShipping()" class="p-2 hover:bg-slate-100 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-4">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                    <h4 class="font-semibold text-green-800 mb-2">Ongkir Fix Rp 100.000</h4>
+                    <p class="text-sm text-green-700">Berlaku untuk wilayah: Jawa, Bali, Lampung, Palembang</p>
+                </div>
+                <div class="border rounded-lg overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs">
+                            <thead class="bg-slate-100">
+                                <tr>
+                                    <th class="text-left p-2 font-medium">Tujuan</th>
+                                    <th class="text-right p-2 font-medium">Kecil</th>
+                                    <th class="text-right p-2 font-medium">Standar</th>
+                                    <th class="text-right p-2 font-medium">Tinggi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipping-table">
+                                <!-- Shipping data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 mt-4">
+                    * Harga sewaktu-waktu bisa berubah untuk menyesuaikan pesawat dan rute penerbangan.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="closeAdminLogin()"></div>
+        <div class="absolute inset-4 md:inset-10 lg:inset-20 bg-white rounded-lg overflow-hidden flex flex-col max-w-sm mx-auto h-fit mt-20">
+            <div class="p-4 border-b">
+                <h3 class="font-semibold text-lg">Login Admin</h3>
+            </div>
+            <div class="p-4 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                    <input type="password" id="admin-password" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Masukkan password">
+                </div>
+                <button onclick="loginAdmin()" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-medium">
+                    Login
+                </button>
+                <p class="text-xs text-slate-500 text-center">
+                    Masukkan password untuk akses admin panel
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="admin-panel-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="closeAdminPanel()"></div>
+        <div class="absolute inset-2 md:inset-4 bg-white rounded-lg overflow-hidden flex flex-col max-w-2xl mx-auto">
+            <div class="flex items-center justify-between p-4 border-b">
+                <h3 class="font-semibold text-lg">Panel Admin</h3>
+                <div class="flex items-center gap-2">
+                    <button onclick="logoutAdmin()" class="text-sm text-red-600 hover:text-red-700">Logout</button>
+                    <button onclick="closeAdminPanel()" class="p-2 hover:bg-slate-100 rounded-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Admin Tabs -->
+            <div class="border-b">
+                <div class="flex">
+                    <button onclick="switchAdminTab('products')" class="admin-tab px-4 py-3 text-sm font-medium border-b-2 border-red-600 text-red-600" data-tab="products">Produk</button>
+                    <button onclick="switchAdminTab('add-product')" class="admin-tab px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700" data-tab="add-product">Tambah</button>
+                    <button onclick="switchAdminTab('categories')" class="admin-tab px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700" data-tab="categories">Kategori</button>
+                    <button onclick="switchAdminTab('business')" class="admin-tab px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700" data-tab="business">Bisnis</button>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-4">
+                <!-- Products Tab -->
+                <div id="tab-products" class="admin-tab-content">
+                    <div id="admin-products-list" class="space-y-2 max-h-96 overflow-y-auto">
+                        <!-- Products list will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Add Product Tab -->
+                <div id="tab-add-product" class="admin-tab-content hidden">
+                    <div class="space-y-4">
+                        <input type="hidden" id="edit-product-id">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nama Produk *</label>
+                            <input type="text" id="product-name" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Nama ikan koi">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Kategori *</label>
+                            <select id="product-category" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                                <option value="">Pilih kategori</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Harga (Rp) *</label>
+                            <input type="number" id="product-price" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="500000">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Deskripsi</label>
+                            <textarea id="product-description" rows="3" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Deskripsi produk..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">URL Video (YouTube/TikTok)</label>
+                            <input type="text" id="product-video-url" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://youtube.com/watch?v=...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Gambar Produk</label>
+                            <input type="file" id="product-image" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+                        </div>
+                        <div class="flex gap-4">
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="product-available" checked class="rounded text-red-600">
+                                <span class="text-sm">Tersedia</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" id="product-featured" class="rounded text-red-600">
+                                <span class="text-sm">Featured</span>
+                            </label>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="saveProduct()" class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-medium">
+                                Simpan Produk
+                            </button>
+                            <button onclick="resetProductForm()" class="px-4 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-50">
+                                Batal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categories Tab -->
+                <div id="tab-categories" class="admin-tab-content hidden">
+                    <div class="space-y-4">
+                        <div class="flex gap-2">
+                            <input type="text" id="new-category-name" class="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Nama kategori baru">
+                            <button onclick="addCategory()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium">Tambah</button>
+                        </div>
+                        <div id="categories-list" class="space-y-2">
+                            <!-- Categories will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Business Tab -->
+                <div id="tab-business" class="admin-tab-content hidden">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Nama Bisnis</label>
+                            <input type="text" id="business-name-input" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">No. HP / WhatsApp</label>
+                            <input type="text" id="business-phone" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                            <input type="email" id="business-email" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">URL Google Maps</label>
+                            <input type="text" id="business-map" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Logo</label>
+                            <input type="file" id="business-logo" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Banner</label>
+                            <input type="file" id="business-banner" accept="image/*" class="w-full px-3 py-2 border border-slate-300 rounded-lg">
+                        </div>
+                        <button onclick="saveBusinessInfo()" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-medium">
+                            Simpan Info Bisnis
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div class="bg-slate-800 text-white px-4 py-2 rounded-lg shadow-lg text-sm"></div>
+    </div>
+
+    <script>
+        // State
+        let businessInfo = null;
+        let products = [];
+        let categories = [];
+        let shippingCosts = [];
+        let selectedCategory = 'all';
+        let isAdmin = false;
+
+        // API Base URL - Change this to your server URL
+        const API_BASE = window.location.origin;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+        });
+
+        // Load all data
+        async function loadData() {
+            try {
+                const [productsRes, categoriesRes, businessRes, shippingRes, authRes] = await Promise.all([
+                    fetch(`${API_BASE}/api/products`),
+                    fetch(`${API_BASE}/api/categories`),
+                    fetch(`${API_BASE}/api/business-info`),
+                    fetch(`${API_BASE}/api/shipping`),
+                    fetch(`${API_BASE}/api/admin/auth`)
+                ]);
+                
+                const productsData = await productsRes.json();
+                const categoriesData = await categoriesRes.json();
+                const businessData = await businessRes.json();
+                const shippingData = await shippingRes.json();
+                const authData = await authRes.json();
+                
+                products = productsData.products || [];
+                categories = categoriesData.categories || [];
+                businessInfo = businessData.businessInfo || null;
+                shippingCosts = shippingData.shippingCosts || [];
+                isAdmin = authData.authenticated || false;
+                
+                renderAll();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                showToast('Gagal memuat data');
+            }
+        }
+
+        // Render all UI
+        function renderAll() {
+            renderBusinessInfo();
+            renderCategories();
+            renderProducts();
+            renderShipping();
+            renderAdminPanel();
+        }
+
+        // Render Business Info
+        function renderBusinessInfo() {
+            if (!businessInfo) return;
+            
+            // Logo
+            if (businessInfo.logoUrl) {
+                const logoImg = document.getElementById('logo-img');
+                logoImg.src = businessInfo.logoUrl + '?v=' + new Date(businessInfo.updatedAt || Date.now()).getTime();
+                logoImg.classList.remove('hidden');
+                document.getElementById('logo-fish').classList.add('hidden');
+            }
+            
+            // Banner
+            if (businessInfo.bannerUrl) {
+                const bannerImg = document.getElementById('banner-img');
+                bannerImg.src = businessInfo.bannerUrl + '?v=' + new Date(businessInfo.updatedAt || Date.now()).getTime();
+                bannerImg.classList.remove('hidden');
+                document.getElementById('banner-container').classList.remove('bg-gradient-to-br', 'from-red-600', 'via-orange-500', 'to-amber-400');
+            }
+            
+            // Text
+            document.getElementById('business-name').textContent = businessInfo.name || 'JAVANISHIKIGOI';
+            document.getElementById('footer-name').textContent = businessInfo.name || 'JAVANISHIKIGOI';
+            document.getElementById('footer-phone').textContent = businessInfo.phone || '085704736854';
+            document.getElementById('footer-email').textContent = businessInfo.email || 'nishikigoijava@gmail.com';
+            
+            // Links
+            document.getElementById('footer-wa').href = `https://wa.me/62${(businessInfo.phone || '085704736854').replace(/^0/, '')}`;
+            document.getElementById('footer-email-link').href = `mailto:${businessInfo.email || 'nishikigoijava@gmail.com'}`;
+            document.getElementById('footer-map').href = businessInfo.mapUrl || 'https://maps.app.goo.gl/8ME1FokgqUgPGqc96';
+            
+            // Admin form
+            document.getElementById('business-name-input').value = businessInfo.name || '';
+            document.getElementById('business-phone').value = businessInfo.phone || '';
+            document.getElementById('business-email').value = businessInfo.email || '';
+            document.getElementById('business-map').value = businessInfo.mapUrl || '';
+        }
+
+        // Render Categories
+        function renderCategories() {
+            const container = document.getElementById('category-filter');
+            container.innerHTML = `
+                <button onclick="filterCategory('all')" class="category-btn px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap ${selectedCategory === 'all' ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-700'}" data-category="all">
+                    Semua
+                </button>
+            `;
+            
+            categories.forEach(cat => {
+                container.innerHTML += `
+                    <button onclick="filterCategory('${cat.slug}')" class="category-btn px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap ${selectedCategory === cat.slug ? 'bg-red-600 text-white' : 'bg-slate-100 text-slate-700'}" data-category="${cat.slug}">
+                        ${cat.name}
+                    </button>
+                `;
+            });
+            
+            // Update category select in admin
+            const select = document.getElementById('product-category');
+            select.innerHTML = '<option value="">Pilih kategori</option>';
+            categories.forEach(cat => {
+                select.innerHTML += `<option value="${cat.id}">${cat.name}</option>`;
+            });
+        }
+
+        // Filter category
+        function filterCategory(slug) {
+            selectedCategory = slug;
+            renderCategories();
+            renderProducts();
+        }
+
+        // Format price
+        function formatPrice(price) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(price);
+        }
+
+        // Get YouTube thumbnail
+        function getYouTubeThumbnail(url) {
+            if (!url) return null;
+            const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
+            return match ? `https://img.youtube.com/vi/${match[1]}/maxresdefault.jpg` : null;
+        }
+
+        // Render Products
+        function renderProducts() {
+            const container = document.getElementById('products-grid');
+            const filtered = selectedCategory === 'all' 
+                ? products 
+                : products.filter(p => p.category?.slug === selectedCategory);
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-2 text-center py-12">
+                        <svg class="w-16 h-16 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                        </svg>
+                        <p class="text-slate-500">Belum ada produk</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(product => {
+                const thumbnail = product.imageUrl || (product.videoUrl ? getYouTubeThumbnail(product.videoUrl) : null);
+                const hasVideo = product.videoUrl && (product.videoUrl.includes('youtube.com') || product.videoUrl.includes('youtu.be'));
+                
+                return `
+                    <div class="bg-white border border-slate-200 rounded-lg overflow-hidden card-hover cursor-pointer" onclick="openProduct('${product.id}')">
+                        <div class="relative aspect-[9/16] bg-slate-100">
+                            ${thumbnail ? 
+                                `<img src="${thumbnail}" alt="${product.name}" class="w-full h-full object-cover">` :
+                                `<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-200 to-slate-300">
+                                    <svg class="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                                    </svg>
+                                </div>`
+                            }
+                            ${product.videoUrl ? `
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            ` : ''}
+                            ${product.isFeatured ? `<span class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] px-1.5 py-0.5 rounded">★ Featured</span>` : ''}
+                            ${!product.isAvailable ? `<span class="absolute top-2 right-2 bg-slate-500 text-white text-[10px] px-1.5 py-0.5 rounded">Habis</span>` : ''}
+                            <span class="absolute bottom-2 left-2 bg-white/90 text-[10px] px-2 py-0.5 rounded">${product.category?.name || ''}</span>
+                        </div>
+                        <div class="p-2.5">
+                            <h3 class="font-semibold text-sm text-slate-800 truncate">${product.name}</h3>
+                            <p class="text-red-600 font-bold text-sm mt-1">${formatPrice(product.price)}</p>
+                            <button onclick="event.stopPropagation(); openWhatsApp('${product.id}')" class="w-full mt-2 bg-green-500 hover:bg-green-600 text-white text-xs py-2 rounded font-medium flex items-center justify-center gap-1">
+                                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                                WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Shipping
+        function renderShipping() {
+            const tbody = document.getElementById('shipping-table');
+            tbody.innerHTML = shippingCosts.map((s, i) => `
+                <tr class="${i % 2 === 0 ? 'bg-white' : 'bg-slate-50'}">
+                    <td class="p-2 font-medium">${s.destination}</td>
+                    <td class="p-2 text-right">${formatPrice(s.smallBox)}</td>
+                    <td class="p-2 text-right">${formatPrice(s.standardBox)}</td>
+                    <td class="p-2 text-right">${formatPrice(s.tallBox)}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Open product detail
+        function openProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            const modal = document.getElementById('product-modal');
+            const img = document.getElementById('modal-product-image');
+            const video = document.getElementById('modal-product-video');
+            
+            document.getElementById('modal-product-name').textContent = product.name;
+            document.getElementById('modal-product-category').textContent = product.category?.name || '';
+            document.getElementById('modal-product-price').textContent = formatPrice(product.price);
+            document.getElementById('modal-product-description').textContent = product.description || '';
+            
+            // Handle media
+            if (product.videoUrl && (product.videoUrl.includes('youtube.com') || product.videoUrl.includes('youtu.be'))) {
+                // YouTube embed
+                img.classList.add('hidden');
+                video.classList.add('hidden');
+                const iframe = document.createElement('iframe');
+                iframe.src = product.videoUrl.replace('watch?v=', 'embed/').replace('youtu.be', 'youtube.com/embed');
+                iframe.className = 'w-full h-full';
+                iframe.allowFullscreen = true;
+                iframe.id = 'modal-youtube-iframe';
+                img.parentElement.appendChild(iframe);
+            } else if (product.videoUrl) {
+                // Local video
+                img.classList.add('hidden');
+                video.classList.remove('hidden');
+                video.src = product.videoUrl;
+            } else {
+                // Image
+                video.classList.add('hidden');
+                img.classList.remove('hidden');
+                img.src = product.imageUrl || '';
+            }
+            
+            // WhatsApp button
+            document.getElementById('modal-wa-btn').onclick = () => openWhatsApp(id);
+            
+            modal.classList.remove('hidden');
+        }
+
+        // Close product modal
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('hidden');
+            
+            // Remove any iframe
+            const iframe = document.getElementById('modal-youtube-iframe');
+            if (iframe) iframe.remove();
+            
+            // Pause video
+            const video = document.getElementById('modal-product-video');
+            video.pause();
+            video.src = '';
+        }
+
+        // Open WhatsApp
+        function openWhatsApp(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const message = encodeURIComponent(`Halo, saya tertarik dengan ikan koi:\n\n*Nama: ${product.name}*\n*Harga: ${formatPrice(product.price)}*\n*Kategori: ${product.category?.name}*\n\nMohon info lebih lanjut.`);
+            const phone = (businessInfo?.phone || '085704736854').replace(/^0/, '');
+            window.open(`https://wa.me/62${phone}?text=${message}`, '_blank');
+        }
+
+        // Show shipping modal
+        function showShipping() {
+            document.getElementById('shipping-modal').classList.remove('hidden');
+        }
+
+        // Close shipping modal
+        function closeShipping() {
+            document.getElementById('shipping-modal').classList.add('hidden');
+        }
+
+        // Admin functions
+        function showAdminLogin() {
+            if (isAdmin) {
+                document.getElementById('admin-panel-modal').classList.remove('hidden');
+            } else {
+                document.getElementById('admin-login-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+            document.getElementById('admin-password').value = '';
+        }
+
+        async function loginAdmin() {
+            const password = document.getElementById('admin-password').value;
+            if (!password) {
+                showToast('Masukkan password');
+                return;
+            }
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/auth`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'login', password })
+                });
+                
+                const data = await res.json();
+                
+                if (data.success) {
+                    isAdmin = true;
+                    closeAdminLogin();
+                    document.getElementById('admin-panel-modal').classList.remove('hidden');
+                    loadAdminProducts();
+                    showToast('Login berhasil!');
+                } else {
+                    showToast('Password salah!');
+                }
+            } catch (error) {
+                showToast('Terjadi kesalahan');
+            }
+        }
+
+        async function logoutAdmin() {
+            try {
+                await fetch(`${API_BASE}/api/admin/auth`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'logout' })
+                });
+                isAdmin = false;
+                closeAdminPanel();
+                showToast('Logout berhasil');
+            } catch (error) {
+                showToast('Terjadi kesalahan');
+            }
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-panel-modal').classList.add('hidden');
+            resetProductForm();
+        }
+
+        function switchAdminTab(tab) {
+            document.querySelectorAll('.admin-tab').forEach(t => {
+                t.classList.remove('border-red-600', 'text-red-600');
+                t.classList.add('border-transparent', 'text-slate-500');
+            });
+            document.querySelector(`.admin-tab[data-tab="${tab}"]`).classList.remove('border-transparent', 'text-slate-500');
+            document.querySelector(`.admin-tab[data-tab="${tab}"]`).classList.add('border-red-600', 'text-red-600');
+            
+            document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById(`tab-${tab}`).classList.remove('hidden');
+            
+            if (tab === 'products') loadAdminProducts();
+            if (tab === 'categories') loadAdminCategories();
+        }
+
+        async function loadAdminProducts() {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/products`);
+                const data = await res.json();
+                const allProducts = data.products || [];
+                
+                const container = document.getElementById('admin-products-list');
+                container.innerHTML = allProducts.map(p => `
+                    <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
+                        <div class="w-12 h-12 bg-slate-200 rounded overflow-hidden flex-shrink-0">
+                            ${p.imageUrl ? `<img src="${p.imageUrl}" alt="${p.name}" class="w-full h-full object-cover">` : 
+                            `<div class="w-full h-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>`}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm truncate">${p.name}</p>
+                            <p class="text-xs text-slate-500">${formatPrice(p.price)} • ${p.category?.name || ''}</p>
+                        </div>
+                        <div class="flex gap-1">
+                            <button onclick="editProduct('${p.id}')" class="px-2 py-1 text-xs text-blue-600 hover:bg-blue-50 rounded">Edit</button>
+                            <button onclick="deleteProduct('${p.id}')" class="px-2 py-1 text-xs text-red-600 hover:bg-red-50 rounded">Hapus</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                showToast('Gagal memuat produk');
+            }
+        }
+
+        async function loadAdminCategories() {
+            const container = document.getElementById('categories-list');
+            container.innerHTML = categories.map(c => `
+                <div class="flex items-center gap-2 p-3 bg-slate-50 rounded-lg">
+                    <div class="flex-1">
+                        <p class="font-medium">${c.name}</p>
+                        <p class="text-xs text-slate-500">${c._count?.products || 0} produk</p>
+                    </div>
+                    <button onclick="deleteCategory('${c.id}')" class="px-2 py-1 text-xs text-red-600 hover:bg-red-50 rounded">Hapus</button>
+                </div>
+            `).join('');
+        }
+
+        function editProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            document.getElementById('edit-product-id').value = id;
+            document.getElementById('product-name').value = product.name;
+            document.getElementById('product-category').value = product.categoryId;
+            document.getElementById('product-price').value = product.price;
+            document.getElementById('product-description').value = product.description || '';
+            document.getElementById('product-video-url').value = product.videoUrl || '';
+            document.getElementById('product-available').checked = product.isAvailable;
+            document.getElementById('product-featured').checked = product.isFeatured;
+            
+            switchAdminTab('add-product');
+        }
+
+        function resetProductForm() {
+            document.getElementById('edit-product-id').value = '';
+            document.getElementById('product-name').value = '';
+            document.getElementById('product-category').value = '';
+            document.getElementById('product-price').value = '';
+            document.getElementById('product-description').value = '';
+            document.getElementById('product-video-url').value = '';
+            document.getElementById('product-available').checked = true;
+            document.getElementById('product-featured').checked = false;
+            document.getElementById('product-image').value = '';
+        }
+
+        async function saveProduct() {
+            const id = document.getElementById('edit-product-id').value;
+            const name = document.getElementById('product-name').value;
+            const categoryId = document.getElementById('product-category').value;
+            const price = document.getElementById('product-price').value;
+            const description = document.getElementById('product-description').value;
+            const videoUrl = document.getElementById('product-video-url').value;
+            const isAvailable = document.getElementById('product-available').checked;
+            const isFeatured = document.getElementById('product-featured').checked;
+            
+            if (!name || !categoryId || !price) {
+                showToast('Nama, kategori, dan harga harus diisi');
+                return;
+            }
+            
+            // Get thumbnail from YouTube if video URL provided
+            let imageUrl = null;
+            if (videoUrl) {
+                imageUrl = getYouTubeThumbnail(videoUrl);
+            }
+            
+            try {
+                const url = id ? `${API_BASE}/api/admin/products` : `${API_BASE}/api/admin/products`;
+                const method = id ? 'PUT' : 'POST';
+                
+                const res = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        id: id || undefined,
+                        name,
+                        categoryId,
+                        price: parseInt(price),
+                        description,
+                        videoUrl: videoUrl || null,
+                        imageUrl,
+                        isAvailable,
+                        isFeatured
+                    })
+                });
+                
+                const data = await res.json();
+                
+                if (data.product) {
+                    showToast(id ? 'Produk berhasil diupdate' : 'Produk berhasil ditambahkan');
+                    resetProductForm();
+                    loadData();
+                    switchAdminTab('products');
+                }
+            } catch (error) {
+                showToast('Gagal menyimpan produk');
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (!confirm('Yakin ingin menghapus produk ini?')) return;
+            
+            try {
+                await fetch(`${API_BASE}/api/admin/products?id=${id}`, { method: 'DELETE' });
+                showToast('Produk berhasil dihapus');
+                loadData();
+            } catch (error) {
+                showToast('Gagal menghapus produk');
+            }
+        }
+
+        async function addCategory() {
+            const name = document.getElementById('new-category-name').value.trim();
+            if (!name) {
+                showToast('Masukkan nama kategori');
+                return;
+            }
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/categories`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name })
+                });
+                
+                const data = await res.json();
+                
+                if (data.category) {
+                    document.getElementById('new-category-name').value = '';
+                    showToast('Kategori berhasil ditambahkan');
+                    loadData();
+                }
+            } catch (error) {
+                showToast('Gagal menambahkan kategori');
+            }
+        }
+
+        async function deleteCategory(id) {
+            if (!confirm('Yakin ingin menghapus kategori ini?')) return;
+            
+            try {
+                await fetch(`${API_BASE}/api/admin/categories?id=${id}`, { method: 'DELETE' });
+                showToast('Kategori berhasil dihapus');
+                loadData();
+            } catch (error) {
+                showToast('Gagal menghapus kategori');
+            }
+        }
+
+        async function saveBusinessInfo() {
+            const name = document.getElementById('business-name-input').value;
+            const phone = document.getElementById('business-phone').value;
+            const email = document.getElementById('business-email').value;
+            const mapUrl = document.getElementById('business-map').value;
+            
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/business-info`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, email, mapUrl })
+                });
+                
+                const data = await res.json();
+                
+                if (data.businessInfo) {
+                    showToast('Info bisnis berhasil disimpan');
+                    loadData();
+                }
+            } catch (error) {
+                showToast('Gagal menyimpan info bisnis');
+            }
+        }
+
+        function renderAdminPanel() {
+            if (isAdmin) {
+                loadAdminProducts();
+            }
+        }
+
+        // Toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.querySelector('div').textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+    </script>
+</body>
+</html>
